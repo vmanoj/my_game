@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script>
+			function draw()
+			{
+				var id = document.getElementById("can_id");
+				var can_context = id.getContext("2d");
+				can_context.fillRect(50,50,120,150);
+				can_context.strokeRect(1,1,100,100)
+				for (var x = 0.5; x < 500; x += 10)
+				{
+					can_context.moveTo(x, 0);
+					can_context.lineTo(x, 375);
+				}
+				for (var y = 0.5; y < 375; y += 10) 
+				{
+					can_context.moveTo(0, y);
+					can_context.lineTo(500, y);
+				}
+				can_context.strokeStyle = "#eee";
+				can_context.stroke();
+			}
+		</script>
+</head>
+<body onload="draw()">
+	<canvas id="can_id" width="500" height="375" border="1px"></canvas>
+</body>
+</html>
