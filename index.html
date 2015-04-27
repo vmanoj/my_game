@@ -1,6 +1,7 @@
 <html>
 	<head>
-		<script>
+		<script src="game_simulator.js"></script>
+		<!--script>
 			function draw()
 			{
 				var id = document.getElementById("can_id");
@@ -20,9 +21,12 @@
 				can_context.strokeStyle = "#eee";
 				can_context.stroke();
 			}
-		</script>
+		</script-->
 </head>
-<body onload="draw()">
-	<canvas id="can_id" width="500" height="375" border="1px"></canvas>
+<body>
+
+	<p>Moves : <span id="mvcount"></span></p>
+	<script>stGame(null, document.getElementById('mvcount'));</script>
+	<canvas id="can_id" width="500" height="500" border="1px"></canvas>
 </body>
 </html>
