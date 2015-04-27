@@ -194,3 +194,27 @@ function clickOnPiece(pieceIndex)
 	gSelectedPieceHasMoved = false;
 	drawBoard();
 }
+
+function isThereAPieceBetween(cell1, cell2) 
+{
+	/* note: assumes cell1 and cell2 are 2 squares away
+	either vertically, horizontally, or diagonally */
+	var rowBetween = (cell1.row + cell2.row) / 2;
+	var columnBetween = (cell1.column + cell2.column) / 2;
+	for (var i = 0; i < gNumPieces; i++) 
+	{
+		if ((gPieces[i].row == rowBetween) &&
+		(gPieces[i].column == columnBetween)) { return true; }
+	}
+	return false;
+}
+
+function isTheGameOver() 
+{
+	for (var i = 0; i < gNumPieces; i++) 
+	{
+		if (gPieces[i].row > 2) { return false; }
+		if (gPieces[i].column < (kBoardWidth - 3)) { return false; }
+	}
+	return true;
+}
