@@ -9,6 +9,13 @@ var gCanvasElement;
 var gDrawingContext;
 var gMoveCountElem;
 
+var gPieces;
+var gNumPieces;
+var gSelectedPieceIndex;
+var gSelectedPieceHasMoved;
+var gMoveCount;
+var gGameInProgress;
+
 function stGame(canvasElement, moveCountElement) {
 	if (!canvasElement)
 	{
@@ -22,12 +29,10 @@ function stGame(canvasElement, moveCountElement) {
 		document.body.appendChild(moveCountElement);
 	}
 	var gCanvasElement = canvasElement;
-	alert(gCanvasElement);
 	gCanvasElement.width = kPixelWidth;
 	gCanvasElement.height = kPixelHeight;
 	gCanvasElement.addEventListener("click", gOnClick, false);
 	gMoveCountElem = moveCountElement;
-	alert(gMoveCountElem);
 	gDrawingContext = gCanvasElement.getContext("2d");
 	if (!resumeGame())
 	{
@@ -83,4 +88,57 @@ if (typeof resumeGame != "function")
 	{
 		return false;
 	}
+}
+
+function newGame() 
+{
+	/* To generate the row, columns and its properties. */
+	gPieces = [new Cell(kBoardHeight - 3, 0),
+		new Cell(kBoardHeight - 2, 0),
+		new Cell(kBoardHeight - 1, 0),
+		new Cell(kBoardHeight - 3, 1),
+		new Cell(kBoardHeight - 2, 1),
+		new Cell(kBoardHeight - 1, 1),
+		new Cell(kBoardHeight - 3, 2),
+		new Cell(kBoardHeight - 2, 2),
+		new Cell(kBoardHeight - 1, 2)];
+	gNumPieces = gPieces.length;
+	gSelectedPieceIndex = -1;
+	gSelectedPieceHasMoved = false;
+	gMoveCount = 0;
+	gGameInProgress = true;
+	drawBoard();
+}
+
+function drawBoard() 
+{
+	/* The canvas element with all row, column being constructed */
+	gDrawingContext.clearRect(0, 0, kPixelWidth, kPixelHeight);
+	gDrawingContext.beginPath();
+    
+	/* vertical lines */
+	for (var x = 0; x <= kPixelWidth; x += kPieceWidth) 
+	{
+		gDrawingContext.moveTo(0.5 + x, 0);
+		gDrawingContext.lineTo(0.5 + x, kPixelHeight);
+	}
+    
+	/* horizontal lines */
+	for (var y = 0; y <= kPixelHeight; y += kPieceHeight) {
+		gDrawingContext.moveTo(0, 0.5 + y);
+		gDrawingContext.lineTo(kPixelWidth, 0.5 +  y);
+	}
+    
+	/* draw it! */
+	gDrawingContext.strokeStyle = "#ccc";
+	gDrawingContext.stroke();
+    
+	for (var i = 0; i < 9; i++) 
+	{
+		drawPiece(gPieces[i], i == gSelectedPieceIndex);
+	}
+
+	gMoveCountElem.innerHTML = gMoveCount;
+
+	saveGameState();
 }
