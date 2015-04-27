@@ -153,3 +153,44 @@ function clickOnEmptyCell(cell)
 	gSelectedPieceHasMoved = false;
 	drawBoard();
 }
+
+function drawBoard() 
+{
+	/* The canvas element with all row, column being constructed */
+	gDrawingContext.clearRect(0, 0, kPixelWidth, kPixelHeight);
+	gDrawingContext.beginPath();
+    
+	/* vertical lines */
+	for (var x = 0; x <= kPixelWidth; x += kPieceWidth) 
+	{
+		gDrawingContext.moveTo(0.5 + x, 0);
+		gDrawingContext.lineTo(0.5 + x, kPixelHeight);
+	}
+    
+	/* horizontal lines */
+	for (var y = 0; y <= kPixelHeight; y += kPieceHeight) {
+		gDrawingContext.moveTo(0, 0.5 + y);
+		gDrawingContext.lineTo(kPixelWidth, 0.5 +  y);
+	}
+    
+	/* draw it! */
+	gDrawingContext.strokeStyle = "#ccc";
+	gDrawingContext.stroke();
+    
+	for (var i = 0; i < 9; i++) 
+	{
+		drawPiece(gPieces[i], i == gSelectedPieceIndex);
+	}
+
+	gMoveCountElem.innerHTML = gMoveCount;
+
+	saveGameState();
+}
+
+function clickOnPiece(pieceIndex) 
+{
+	if (gSelectedPieceIndex == pieceIndex) { return; }
+	gSelectedPieceIndex = pieceIndex;
+	gSelectedPieceHasMoved = false;
+	drawBoard();
+}
