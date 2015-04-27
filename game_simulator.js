@@ -240,6 +240,14 @@ function drawPiece(p, selected)
 
 function endGame() 
 {
+	isTheGameOver();
+	location.reload();
 	gSelectedPieceIndex = -1;
 	gGameInProgress = false;
+}
+
+function rstGame(divid)
+{
+	document.getElementById(divid).innertHTML = "";
+	document.getElementById(divid).innertHTML = stGame(null, document.getElementById('mvcount'));
 }
