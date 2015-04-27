@@ -1,32 +1,42 @@
 <html>
 	<head>
-		<script src="game_simulator.js"></script>
-		<!--script>
-			function draw()
-			{
-				var id = document.getElementById("can_id");
-				var can_context = id.getContext("2d");
-				can_context.fillRect(50,50,120,150);
-				can_context.strokeRect(1,1,100,100)
-				for (var x = 0.5; x < 500; x += 10)
-				{
-					can_context.moveTo(x, 0);
-					can_context.lineTo(x, 375);
-				}
-				for (var y = 0.5; y < 375; y += 10) 
-				{
-					can_context.moveTo(0, y);
-					can_context.lineTo(500, y);
-				}
-				can_context.strokeStyle = "#eee";
-				can_context.stroke();
+		<style>
+			div {
+				font-family: "Times New Roman";
+				font-size: 20px;
 			}
-		</script-->
-</head>
+			.divcorners1 {
+				border-radius: 15px;
+				background: #8AC007;
+				padding: 10px; 
+				width: 35px;
+				height: 15px;
+				float:left;
+				text-align:justify;
+				cursor: pointer;					
+			}
+			.divcorners2{
+				border-radius: 15px;
+				background: #8AC007;
+				padding: 10px; 
+				width: 40px;
+				height: 15px;
+				cursor: pointer;
+				float:right;
+				text-align:justify;
+				margin-right:800px
+			}
+		</style>
+		<script src="game_simulator.js"></script>
+	</head>
 <body>
 
-	<p>Moves : <span id="mvcount"></span></p>
+	<div>Moves : <span id="mvcount"></span></div><br>
+	<div class="divcorners1" onclick="rstGame(document.getElementById('div_canvas'))">Start</div>
+	<div class="divcorners2" onclick="endGame()">Reset</div><br><br>
 	<script>stGame(null, document.getElementById('mvcount'));</script>
-	<canvas id="can_id" width="500" height="500" border="1px"></canvas>
+	<div id="div_canvas">
+		<canvas id="can_id" width="451" height="451" border="1px"></canvas>
+	</div>
 </body>
 </html>
