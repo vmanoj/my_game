@@ -1,9 +1,20 @@
+var kBoardWidth = 9;
+var kBoardHeight= 9;
+var kPieceWidth = 50;
+var kPieceHeight= 50;
+var kPixelWidth = 1 + (kBoardWidth * kPieceWidth);
+var kPixelHeight= 1 + (kBoardHeight * kPieceHeight);
+
 var gCanvasElement;
 var gDrawingContext;
 var gMoveCountElem;
 
 var gPieces;
 var gNumPieces;
+var gSelectedPieceIndex;
+var gSelectedPieceHasMoved;
+var gMoveCount;
+var gGameInProgress;
 
 function stGame(canvasElement, moveCountElement) {
 	if (!canvasElement)
@@ -71,4 +82,36 @@ function getCursorPosition(e)
 	y = Math.min(y, kBoardHeight * kPieceHeight);
 	var cell = new Cell(Math.floor(y/kPieceHeight), Math.floor(x/kPieceWidth));
 	return cell;
+}
+
+if (typeof resumeGame != "function") 
+{
+	saveGameState = function()
+	{
+		return false;
+	}
+	resumeGame = function() 
+	{
+		return false;
+	}
+}
+
+function newGame() 
+{
+	/* To generate the row, columns and its properties. */
+	gPieces = [new Cell(kBoardHeight - 3, 0),
+		new Cell(kBoardHeight - 2, 0),
+		new Cell(kBoardHeight - 1, 0),
+		new Cell(kBoardHeight - 3, 1),
+		new Cell(kBoardHeight - 2, 1),
+		new Cell(kBoardHeight - 1, 1),
+		new Cell(kBoardHeight - 3, 2),
+		new Cell(kBoardHeight - 2, 2),
+		new Cell(kBoardHeight - 1, 2)];
+	gNumPieces = gPieces.length;
+	gSelectedPieceIndex = -1;
+	gSelectedPieceHasMoved = false;
+	gMoveCount = 0;
+	gGameInProgress = true;
+	drawBoard();
 }
