@@ -218,3 +218,28 @@ function isTheGameOver()
 	}
 	return true;
 }
+
+function drawPiece(p, selected) 
+{
+	var column = p.column;
+	var row = p.row;
+	var x = (column * kPieceWidth) + (kPieceWidth/2);
+	var y = (row * kPieceHeight) + (kPieceHeight/2);
+	var radius = (kPieceWidth/2) - (kPieceWidth/10);
+	gDrawingContext.beginPath();
+	gDrawingContext.arc(x, y, radius, 0, Math.PI*2, false);
+	gDrawingContext.closePath();
+	gDrawingContext.strokeStyle = "#000";
+	gDrawingContext.stroke();
+	if (selected) 
+	{
+		gDrawingContext.fillStyle = "#000";
+		gDrawingContext.fill();
+	}
+}
+
+function endGame() 
+{
+	gSelectedPieceIndex = -1;
+	gGameInProgress = false;
+}
