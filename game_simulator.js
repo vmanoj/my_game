@@ -248,6 +248,7 @@ function endGame()
 
 function rstGame(divid)
 {
-	document.getElementById(divid).innertHTML = "";
-	document.getElementById(divid).innertHTML = stGame(null, document.getElementById('mvcount'));
+	//document.getElementById(divid).innertHTML = "";
+	location.reload();
+	stGame(null, document.getElementById('mvcount'));
 }
