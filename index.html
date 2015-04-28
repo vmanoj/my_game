@@ -35,8 +35,12 @@
 	<div class="divcorners1" onclick="rstGame(document.getElementById('div_canvas'))">Start</div>
 	<div class="divcorners2" onclick="endGame()">Reset</div><br><br>
 	<script>stGame(null, document.getElementById('mvcount'));</script>
-	<div id="div_canvas">
-		<canvas id="can_id" width="451" height="451" border="1px"></canvas>
+	<canvas id="can_id" width="451" height="451" border="1px"></canvas>
+	<br><br><div><strong>Rules :</strong>
+		<ul>
+			<li>Take a piece and move it to any adjacent empty square. An “empty” square is one that does not currently have a piece in it. An “adjacent” square is immediately north, south, east, west, northwest, northeast, southwest, or southeast of the piece’s current position. (The board does not wrap around from one side to the other. If a piece is in the left-most column, it can not move west, northwest, or southwest. If a piece is in the bottom-most row, it can not move south, southeast, or southwest.)</li>
+			<li>Take a piece and hop over an adjacent piece, and possibly repeat. That is, if you hop over an adjacent piece, then hop over <em>another</em> piece adjacent to your new position, that counts as a single move. In fact, any number of hops still counts as a single move. (Since the goal is to minimize the total number of moves, doing well in canvas game involves constructing, and then using, long chains of staggered pieces so that other pieces can hop over them in long sequences.)</li>
+		</ul>
 	</div>
 </body>
 </html>
